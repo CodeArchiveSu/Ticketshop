@@ -4,8 +4,31 @@
 }
 
 
+.Login-page{
+  height: 94vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 로그인페이지 */
+.Login-container{
+  width: 25vw;
+  height: 30vh;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  
+}
+
+/* .login-button:hover{
+  border:
+} */
+
 .nav-container {
   position: sticky;
+  height: 6vh;
   width: 90vw;
   font-family: Maria;
   border-radius: 30px;
