@@ -1,83 +1,92 @@
-import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import '../App.css'
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import React, { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "../App.css";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
+import { Events } from "../@types/CustomTypes";
+import { Fade } from "react-awesome-reveal";
+import { useStore } from "react-redux";
 
-
-type Event = {
-    id: string;
-    name: string;
-    images: Image[];
-    dates: Dates;
-    promoter: Promoter;
+interface MainpageProps {
+  concerts: Events[];
+  search: any;
+  fetchErorr: any;
+  catchError: boolean;
+  setSearch?: React.Dispatch<React.SetStateAction<any>>;
+  // setconcerts: React.Dispatch<React.SetStateAction<Event[]>>;
 }
 
-interface Promoter {
-    id: number;
-}
-interface Image {
-    url: string;
-}
-interface Dates {
-    start: Start
-}
+function Mainpage({ concerts, search, fetchErorr, catchError }: MainpageProps) {
+  let navigate = useNavigate();
+  const [fade, setFade] = useState("");
 
-interface Start {
-    localDate: string
-}
+  const filteredItems = concerts.filter((item: Events, index) => {
+    return item.name.toLowerCase().includes(search);
+  });
 
-function Mainpage({ concerts }: { concerts: Event[] }) {
-    return (
+  useEffect(() => {
+    if (catchError) {
+      setFade("erorr");
+    }
+  });
 
-        <div className='imageSlider'>
-            <Swiper
-                spaceBetween={20}
-                centeredSlides={true}
-                autoplay={{
-                    delay: 2000,
-                    disableOnInteraction: true,
+  return (
+    <>
+      <div className={"imageSlider no-erorr " + fade}>
+        <Swiper
+          spaceBetween={20}
+          centeredSlides={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: true,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          className="mySwiper"
+        >
+          {concerts.length > 0 &&
+            concerts.slice(0, 3).map((item: Events, index: number) => (
+              <div key={item.promoter.id} className="image-box">
+                <SwiperSlide>
+                  <img className="banner-image" src={item.images[0].url}></img>
+                </SwiperSlide>
+              </div>
+            ))}
+        </Swiper>
+
+        <p className="neuigkeiten">NEUIGKEITEN</p>
+        {/* <Fade direction={"left"}>{"이건 왼쪽에서"}</Fade> */}
+
+        <div className="cards-container">
+          {filteredItems &&
+            filteredItems.map((item: Events, index: number) => (
+              <div
+                className="cards"
+                key={item.id}
+                onClick={() => navigate(`/detail/${index}`)}
+                style={{
+                  backgroundImage: `url(${item.images[1]?.url})`,
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
                 }}
-                pagination={{
-                    clickable: true,
-                }}
-                navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper"
-            >
-
-                {concerts.length > 0 && concerts
-                    .slice(0, 3)
-                    .map((item, index) => (
-                        <div key={concerts[index].promoter.id} className='image-box'>
-                            <SwiperSlide><img className="banner-image" src={item.images[2]?.url}></img></SwiperSlide>
-                        </div>))
-                }
-            </Swiper>
-
-            <p className='neuigkeiten'>NEUIGKEITEN</p>
-
-            <div className='cards-container'>
-
-                {
-                    concerts.map((item, index) => (
-                        <div className='cards' key={concerts[index].id}>
-                            <div className="textBox">
-                                <div>{concerts[index]?.name}</div>
-                                {/* <div>{concerts[index]?.dates.start.localDate}</div> */}
-                                {/* <div className="button">Jetzt Ticket Sichern!</div> */}
-                            </div>
-                            <div className='concert-image-box'>
-                                <img className='concert-image' src={item.images[1]?.url} />
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
+              >
+                <div className="textBox">
+                  <div>{item.name}</div>
+                </div>
+              </div>
+            ))}
         </div>
-    )
+      </div>
+      {catchError && <div className="Erorr-modal">Erorr: {fetchErorr}</div>}
+    </>
+  );
 }
 
-export default Mainpage
+export default Mainpage;
