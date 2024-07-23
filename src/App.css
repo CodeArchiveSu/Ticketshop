@@ -241,10 +241,6 @@
   width: 100vw;
 }
 
-/* .detail-image {
-  width: 20vw;
-} */
-
 .detail-image img {
   width: 100%;
 }
@@ -270,7 +266,7 @@
   display: flex;
   flex-direction: column;
   padding: 1vh 3vh 0 3vh;
-  width: 100%;
+  width: 50%;
   height: 100%;
   padding-right: 10vw;
 }
@@ -423,12 +419,10 @@
     display: block;
     width: 40vw;
   }
+
   .nav-container {
     background-color: transparent;
     height: 10vh;
-  }
-  .me-auto {
-    border-radius: 20px;
   }
 
   .link {
@@ -440,11 +434,12 @@
   }
 
   .me-auto {
+    border-radius: 20px;
     position: fixed;
     bottom: 1vh;
     background-color: white;
     /* inset -3em 0 3em -3em blue; */
-    box-shadow: inset 3em 0 3em -3em rgba(255, 255, 255, 0.5),
+    box-shadow: inset 3em 0 3em -3em rgb(255, 255, 255),
       inset -3em 0 3em -3em rgb(255, 255, 255);
     width: 68vw;
     left: 0;

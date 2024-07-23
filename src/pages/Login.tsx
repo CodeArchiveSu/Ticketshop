@@ -27,13 +27,13 @@ function Login() {
   const [erorrMessage, setErorrMessage] = useState("");
   const [erorrStatus, seterorrStatus] = useState(false);
 
-  const saveId = (e: any) => {
+  const saveId = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     let id1 = e.target.value;
     setUserID(id1);
   };
 
-  const savePassword = (e: any) => {
+  const savePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     let id2 = e.target.value;
     setPassword(id2);

@@ -28,6 +28,9 @@ function App() {
   function accessToGeo(position: GeolocationPosition) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
+    // if(latitude){
+
+    // }
     fetchAPI(latitude, longitude);
   }
 
