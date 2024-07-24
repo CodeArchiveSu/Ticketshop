@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://codearchivesu.github.io/Ticketshop/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
