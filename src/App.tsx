@@ -24,7 +24,7 @@ function App() {
 
   let latitude = null; // 예시 위도
   let longitude = null; // 예시 경도
-
+  console.log("test");
   function accessToGeo(position: GeolocationPosition) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
