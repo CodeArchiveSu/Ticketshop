@@ -7,8 +7,6 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import { Events } from "../@types/CustomTypes";
-import { Fade } from "react-awesome-reveal";
-import { useStore } from "react-redux";
 
 interface MainpageProps {
   concerts: Events[];
@@ -23,7 +21,7 @@ function Mainpage({ concerts, search, fetchErorr, catchError }: MainpageProps) {
   let navigate = useNavigate();
   const [fade, setFade] = useState("");
 
-  const filteredItems = concerts.filter((item: Events, index) => {
+  const filteredItems = concerts.filter((item: Events) => {
     return item.name.toLowerCase().includes(search);
   });
 
@@ -51,7 +49,7 @@ function Mainpage({ concerts, search, fetchErorr, catchError }: MainpageProps) {
           className="mySwiper"
         >
           {concerts.length > 0 &&
-            concerts.slice(0, 3).map((item: Events, index: number) => (
+            concerts.slice(0, 3).map((item: Events) => (
               <div key={item.promoter.id} className="image-box">
                 <SwiperSlide>
                   <img className="banner-image" src={item.images[0].url}></img>

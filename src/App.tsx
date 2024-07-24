@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Navigationbar from "./components/Navigationbar";
 import Mainpage from "./pages/Mainpage";
@@ -12,7 +12,7 @@ import "./App.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Events } from "./@types/CustomTypes";
 import Cart from "./pages/Cart";
 

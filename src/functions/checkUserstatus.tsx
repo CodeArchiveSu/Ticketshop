@@ -1,9 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebaseConfig";
 import { setUser } from "../store";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-
 const checkUserstatus = (dispatch: any) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {

@@ -1,5 +1,4 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "firebase/auth";
 
 export type UserState = UserItem[];
 
@@ -11,9 +10,9 @@ export interface UserItem {
 }
 
 export interface Users {
+  Id: string;
   id: string;
-  email: string;
-  // password: any;
+  email?: string;
   name?: string;
 }
 
@@ -24,10 +23,10 @@ const userSlice = createSlice({
   name: "User",
   initialState: initialState2,
   reducers: {
-    setUser(state, action) {
+    setUser(_, action) {
       return action.payload;
     },
-    userLogout(state, action) {
+    userLogout() {
       return null;
     },
   },
@@ -39,7 +38,7 @@ const Cart = createSlice({
   reducers: {
     addItem(state, action: PayloadAction<UserItem>) {
       const 중복찾기 = state.find((item) => item.name === action.payload.name);
-      const 번호 = state.findIndex((item, index) => {
+      const 번호 = state.findIndex((item) => {
         return item.id == action.payload.id;
       });
 
@@ -50,7 +49,7 @@ const Cart = createSlice({
       }
     },
     minusItem(state, action: PayloadAction<string>) {
-      const 번호 = state.findIndex((item, index) => {
+      const 번호 = state.findIndex((item) => {
         return item.id == action.payload;
       });
       //장바구니 카운트 0 되면 그냥 슬라이스해버리기
@@ -66,7 +65,7 @@ const Cart = createSlice({
       }
     },
     plusItem(state, action: PayloadAction<UserItem>) {
-      const 번호 = state.findIndex((item, index) => {
+      const 번호 = state.findIndex((item) => {
         return item.id == action.payload.id;
       });
       state[번호].count += 1;
@@ -75,7 +74,7 @@ const Cart = createSlice({
       ).toString();
     },
     removeItem(state, action: PayloadAction<string>) {
-      const 번호 = state.findIndex((item, index) => {
+      const 번호 = state.findIndex((item) => {
         return item.id == action.payload;
       });
 

@@ -1,10 +1,10 @@
-import { React, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Events } from "../@types/CustomTypes.ts";
 import { useDispatch, useSelector } from "react-redux";
-import { UserItem, Users, addItem } from "../store.tsx";
+import { Users } from "../store.tsx";
 import { db } from "../config/firebaseConfig.ts";
-import { collection, getDocs, serverTimestamp } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 import checkUserstatus from "../functions/checkUserstatus.tsx";
 
 type QuizParams = {
@@ -13,7 +13,7 @@ type QuizParams = {
 
 function Detail({ concerts }: { concerts: Events[] }) {
   let { id } = useParams<QuizParams>();
-  const eventId = parseInt(id);
+  const eventId = parseInt(id ?? "0");
   let dispatch = useDispatch();
   let navigate = useNavigate();
   console.log(concerts);

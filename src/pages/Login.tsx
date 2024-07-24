@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
-import firebase, { auth } from "../config/firebaseConfig"; // Firebase 초기화 코드 포함 파일에서 import
-
 import { Users, setUser, userLogout } from "../store";
 import { useDispatch, useSelector } from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
 import checkUserstatus from "../functions/checkUserstatus";
+import firebase from "../config/firebaseConfig";
 
 function Login() {
   let navigate = useNavigate();
@@ -39,24 +37,30 @@ function Login() {
     setPassword(id2);
   };
 
+  // type resultLogin = {
+  //   Id:string;
+  //   id: string;
+  //   name?:string;
+  // }
+
   const Login = () => {
-    console.log("아이디", userID);
-    console.log("비번", password);
     firebase
       .auth()
       .signInWithEmailAndPassword(userID, password)
       .then((result) => {
         console.log("유저", result.user);
+
         const user = {
           Id: userID,
           id: result.user?.uid,
           name: result.user?.displayName,
         };
+
         dispatch(setUser(user));
+
         console.log();
       })
-      .catch((error) => {
-        const errorCode = error.code;
+      .catch((error: any) => {
         const errorMessage = error.message;
         console.log(errorMessage);
         setErorrMessage(errorMessage);
@@ -77,7 +81,7 @@ function Login() {
         dispatch(userLogout());
         checkUserstatus(dispatch);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         // 로그아웃 실패 시 처리
         console.error("Logout failed: ", error);
       });

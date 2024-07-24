@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Users, setUser, userLogout } from "../store";
-import firebase, { auth } from "../config/firebaseConfig"; // Firebase 초기화 코드 포함 파일에서 import
+import { Users, userLogout } from "../store";
+import firebase from "../config/firebaseConfig"; // Firebase 초기화 코드 포함 파일에서 import
 import { Events } from "../@types/CustomTypes";
-import { onAuthStateChanged } from "firebase/auth";
 import checkUserstatus from "../functions/checkUserstatus";
 
 interface MainpageProps {
@@ -18,7 +17,7 @@ interface MainpageProps {
   // setconcerts: React.Dispatch<React.SetStateAction<Event[]>>;
 }
 
-function Navigationbar({ concerts, search, setSearch }: MainpageProps) {
+function Navigationbar({ setSearch }: MainpageProps) {
   let navigate = useNavigate();
   let dispatch = useDispatch();
 

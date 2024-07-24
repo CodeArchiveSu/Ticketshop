@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Users } from "../store.tsx";
 
@@ -50,7 +50,7 @@ function Cart({ concerts }: { concerts: Events[] }) {
           newItems.push(data);
         });
         console.log(newItems);
-        const filteredbyUser = newItems.filter((item, index) => {
+        const filteredbyUser = newItems.filter((item) => {
           return item.userID == LoggedinUser.id;
         });
         console.log(filteredbyUser);
@@ -67,7 +67,7 @@ function Cart({ concerts }: { concerts: Events[] }) {
         products.push(data);
       });
 
-      const filteredbyUser = products.filter((item, index) => {
+      const filteredbyUser = products.filter((item) => {
         return item.UserId == LoggedinUser.id;
       });
 
@@ -94,7 +94,7 @@ function Cart({ concerts }: { concerts: Events[] }) {
     }
   }, [LoggedinUser]);
 
-  const minusItem = (item: Product, index: number) => {
+  const minusItem = (index: number) => {
     const docId = `${cartItems[index].id}`;
     const docRef = db.collection("Cart").doc(docId);
     docRef.get().then((doc) => {
@@ -131,7 +131,7 @@ function Cart({ concerts }: { concerts: Events[] }) {
     });
   };
 
-  const plusItem = (item: Product, index: number) => {
+  const plusItem = (index: number) => {
     const docId = `${cartItems[index].id}`;
     const docRef = db.collection("Cart").doc(docId);
     docRef.get().then((doc) => {
@@ -156,10 +156,10 @@ function Cart({ concerts }: { concerts: Events[] }) {
     });
   };
 
-  const removeItem = (item: Product, index: number) => {
+  const removeItem = (index: number) => {
     const docId = `${cartItems[index].id}`;
     const docRef = db.collection("Cart").doc(docId);
-    docRef.get().then((doc) => {
+    docRef.get().then(() => {
       docRef
         .delete()
         .then(() => {
@@ -175,17 +175,12 @@ function Cart({ concerts }: { concerts: Events[] }) {
     console.log("Clicked item index:", 구멍); // 디버깅 로그 추가
     console.log("Recent items:", recentItems); // 디버깅 로그 추가
 
-    const findIndex = concerts.findIndex((item, index) => {
+    const findIndex = concerts.findIndex((item) => {
       return item.id == recentItems[구멍].ItemId;
     });
     navigate(`/detail/${findIndex}`);
     console.log(findIndex);
   };
-
-  // const handleItemClick = (itemId: string) => {
-  //   const findIndex = concerts.findIndex((item) => item.id === itemId);
-  //   navigate(`/detail/${findIndex}`);
-  // };
 
   let [fade, setFade] = useState("");
 
@@ -208,7 +203,7 @@ function Cart({ concerts }: { concerts: Events[] }) {
                   <div className="count">
                     <button
                       onClick={() => {
-                        minusItem(item, index);
+                        minusItem(index);
                       }}
                     >
                       -
@@ -216,7 +211,7 @@ function Cart({ concerts }: { concerts: Events[] }) {
                     {item.Count}
                     <button
                       onClick={() => {
-                        plusItem(item, index);
+                        plusItem(index);
                       }}
                     >
                       +
@@ -225,7 +220,7 @@ function Cart({ concerts }: { concerts: Events[] }) {
                   <div>
                     <button
                       onClick={() => {
-                        removeItem(item, index);
+                        removeItem(index);
                       }}
                     >
                       Entfernen

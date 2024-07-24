@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-import { Navigate, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import firebase, { auth } from "../config/firebaseConfig";
+import firebase from "../config/firebaseConfig";
 
 function Register() {
-  let dispatch = useDispatch();
   let navigate = useNavigate();
   const [userID, setUserID] = useState("");
   const [password, setPassword] = useState("");
