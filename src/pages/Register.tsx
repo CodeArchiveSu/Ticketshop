@@ -1,7 +1,5 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import firebase from "../config/firebaseConfig";

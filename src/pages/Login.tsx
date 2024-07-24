@@ -37,12 +37,6 @@ function Login() {
     setPassword(id2);
   };
 
-  // type resultLogin = {
-  //   Id:string;
-  //   id: string;
-  //   name?:string;
-  // }
-
   const Login = () => {
     firebase
       .auth()
